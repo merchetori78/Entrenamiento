@@ -33,8 +33,9 @@
   .nav-tab.active { color: var(--accent); background: rgba(107,142,35,.10); }
 
   /* MAIN */
-  main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
-
+  main {  max-width: 960px;  margin: 0 auto;  padding: 1.25rem 1.5rem;}
+  @media (max-width: 600px) {  main {    padding: 1rem 1rem;  }
+}
   /* WEEK GRID */
   .week-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 1.5rem; }
   .week-header h2 { font-size: 22px; font-weight: 500; }
