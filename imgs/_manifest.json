@@ -1,0 +1,626 @@
+[
+  {
+    "exercise_name": "Bicho Muerto",
+    "slug": "bicho_muerto",
+    "pdf": "Mercedes Toribio 23.03.2023.pdf",
+    "page": 2,
+    "row_top": 461.8333435058594,
+    "row_bottom": 562.0755615234375,
+    "bbox": [
+      269.3399963378906,
+      475.3840026855469,
+      400.6499938964844,
+      523.0
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/bicho_muerto.png",
+    "score": 56342
+  },
+  {
+    "exercise_name": "Bird Dog",
+    "slug": "bird_dog",
+    "pdf": "Mercedes Toribio 09.03.2023.pdf",
+    "page": 1,
+    "row_top": 594.5556030273438,
+    "row_bottom": 839.9199829101562,
+    "bbox": [
+      266.7200012207031,
+      603.0670166015625,
+      403.6300048828125,
+      670.3299560546875
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/bird_dog.png",
+    "score": 83022
+  },
+  {
+    "exercise_name": "Curl bíceps mancuernas",
+    "slug": "curl_biceps_mancuernas",
+    "pdf": "Mercedes Toribio 16.03.2023.pdf",
+    "page": 2,
+    "row_top": 666.465576171875,
+    "row_bottom": 839.9199829101562,
+    "bbox": [
+      292.489990234375,
+      667.1319580078125,
+      387.2459716796875,
+      747.6669921875
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/curl_biceps_mancuernas.png",
+    "score": 68970
+  },
+  {
+    "exercise_name": "Curl con gomas",
+    "slug": "curl_con_gomas",
+    "pdf": "DOSIS DE EJERCICIO ISABEL VENTURA 21-02-2023.pdf",
+    "page": 2,
+    "row_top": 463.1556091308594,
+    "row_bottom": 562.7955932617188,
+    "bbox": [
+      317.2699890136719,
+      463.0220031738281,
+      380.0690002441406,
+      542.1300048828125
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/curl_con_gomas.png",
+    "score": 45220
+  },
+  {
+    "exercise_name": "Escalador",
+    "slug": "escalador",
+    "pdf": "Mercedes Toribio 16.03.2023.pdf",
+    "page": 2,
+    "row_top": 564.0755615234375,
+    "row_bottom": 664.465576171875,
+    "bbox": [
+      278.4200134277344,
+      576.1270141601562,
+      392.6100158691406,
+      635.239990234375
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/escalador.png",
+    "score": 61054
+  },
+  {
+    "exercise_name": "Floor Press con Mancuernas",
+    "slug": "floor_press_con_mancuernas",
+    "pdf": "Mercedes Toribio 09.03.2023.pdf",
+    "page": 2,
+    "row_top": 157.46560668945312,
+    "row_bottom": 257.1356506347656,
+    "bbox": [
+      267.44000244140625,
+      183.1199951171875,
+      403.96002197265625,
+      231.239990234375
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/floor_press_con_mancuernas.png",
+    "score": 59450
+  },
+  {
+    "exercise_name": "Fondos de rodilla",
+    "slug": "fondos_de_rodilla",
+    "pdf": "Mercedes Toribio 13.04.2023.pdf",
+    "page": 2,
+    "row_top": 157.46560668945312,
+    "row_bottom": 257.1356506347656,
+    "bbox": [
+      273.6000061035156,
+      177.35897827148438,
+      404.8399963378906,
+      218.719970703125
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/fondos_de_rodilla.png",
+    "score": 49375
+  },
+  {
+    "exercise_name": "Fondos en multipower",
+    "slug": "fondos_en_multipower",
+    "pdf": "DOSIS DE EJERCICIO ISABEL VENTURA 21-02-2023.pdf",
+    "page": 2,
+    "row_top": 259.1356506347656,
+    "row_bottom": 359.015625,
+    "bbox": [
+      281.9599914550781,
+      272.07598876953125,
+      396.8399963378906,
+      334.92999267578125
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/fondos_en_multipower.png",
+    "score": 65394
+  },
+  {
+    "exercise_name": "Gato/Camello",
+    "slug": "gato_camello",
+    "pdf": "Mercedes Toribio 09.03.2023.pdf",
+    "page": 1,
+    "row_top": 289.4761962890625,
+    "row_bottom": 389.255615234375,
+    "bbox": [
+      270.0299987792969,
+      287.0539855957031,
+      401.3659973144531,
+      375.8299865722656
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/gato_camello.png",
+    "score": 105465
+  },
+  {
+    "exercise_name": "Hip Thrust",
+    "slug": "hip_thrust",
+    "pdf": "Mercedes Toribio 26.04.2023.pdf",
+    "page": 2,
+    "row_top": 157.46560668945312,
+    "row_bottom": 257.1356506347656,
+    "bbox": [
+      269.5299987792969,
+      170.75601196289062,
+      399.22998046875,
+      227.1300048828125
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/hip_thrust.png",
+    "score": 66300
+  },
+  {
+    "exercise_name": "Hollow alternando piernas",
+    "slug": "hollow_alternando_piernas",
+    "pdf": "Mercedes Toribio 30.03.2023.pdf",
+    "page": 2,
+    "row_top": 665.74560546875,
+    "row_bottom": 839.9199829101562,
+    "bbox": [
+      269.45001220703125,
+      671.2570190429688,
+      401.9000244140625,
+      735.3200073242188
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/hollow_alternando_piernas.png",
+    "score": 76814
+  },
+  {
+    "exercise_name": "Jalón agarre ancho prono",
+    "slug": "jalon_agarre_ancho_prono",
+    "pdf": "Mercedes Toribio 13.04.2023.pdf",
+    "page": 2,
+    "row_top": 462.4356384277344,
+    "row_bottom": 562.3155517578125,
+    "bbox": [
+      274.5899963378906,
+      463.3079833984375,
+      395.6099853515625,
+      547.72998046875
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/jalon_agarre_ancho_prono.png",
+    "score": 92820
+  },
+  {
+    "exercise_name": "Movilidad Torácica",
+    "slug": "movilidad_toracica",
+    "pdf": "Mercedes Toribio 21.04.2023.pdf",
+    "page": 1,
+    "row_top": 391.1161804199219,
+    "row_bottom": 490.9156188964844,
+    "bbox": [
+      268.2099914550781,
+      388.3299865722656,
+      404.6549987792969,
+      478.2699890136719
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/movilidad_toracica.png",
+    "score": 111110
+  },
+  {
+    "exercise_name": "Peso muerto",
+    "slug": "peso_muerto",
+    "pdf": "Mercedes Toribio 09.03.2023.pdf",
+    "page": 2,
+    "row_top": 259.1356506347656,
+    "row_bottom": 358.775634765625,
+    "bbox": [
+      270.3599853515625,
+      257.33502197265625,
+      403.3599853515625,
+      343.79998779296875
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/peso_muerto.png",
+    "score": 104000
+  },
+  {
+    "exercise_name": "Peso muerto rumano con barra",
+    "slug": "peso_muerto_rumano_con_barra",
+    "pdf": "Mercedes Toribio 30.03.2023.pdf",
+    "page": 2,
+    "row_top": 252.89559936523438,
+    "row_bottom": 358.775634765625,
+    "bbox": [
+      272.8299865722656,
+      257.4839782714844,
+      395.69000244140625,
+      340.6899719238281
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/peso_muerto_rumano_con_barra.png",
+    "score": 92870
+  },
+  {
+    "exercise_name": "Peso muerto rumano con mancuernas",
+    "slug": "peso_muerto_rumano_con_mancuernas",
+    "pdf": "Mercedes Toribio 21.04.2023.pdf",
+    "page": 2,
+    "row_top": 153.41632080078125,
+    "row_bottom": 257.1356506347656,
+    "bbox": [
+      284.5799865722656,
+      157.30902099609375,
+      386.4599914550781,
+      246.95001220703125
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/peso_muerto_rumano_con_mancuernas.png",
+    "score": 82890
+  },
+  {
+    "exercise_name": "Plancha Cuadrupedia",
+    "slug": "plancha_cuadrupedia",
+    "pdf": "Mercedes Toribio 26.04.2023.pdf",
+    "page": 2,
+    "row_top": 564.0755615234375,
+    "row_bottom": 663.74560546875,
+    "bbox": [
+      266.4599914550781,
+      570.25,
+      398.2200012207031,
+      650.3999633789062
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/plancha_cuadrupedia.png",
+    "score": 95832
+  },
+  {
+    "exercise_name": "Plancha Frontal",
+    "slug": "plancha_frontal",
+    "pdf": "Mercedes Toribio 09.03.2023.pdf",
+    "page": 1,
+    "row_top": 492.9156188964844,
+    "row_bottom": 592.5556030273438,
+    "bbox": [
+      267.8500061035156,
+      515.8299560546875,
+      403.8500061035156,
+      559.43994140625
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/plancha_frontal.png",
+    "score": 53988
+  },
+  {
+    "exercise_name": "Plancha Frontal un apoyo",
+    "slug": "plancha_frontal_un_apoyo",
+    "pdf": "Mercedes Toribio 13.04.2023.pdf",
+    "page": 2,
+    "row_top": 665.74560546875,
+    "row_bottom": 839.9199829101562,
+    "bbox": [
+      269.3399963378906,
+      689.1859741210938,
+      401.8999938964844,
+      723.8499755859375
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/plancha_frontal_un_apoyo.png",
+    "score": 41790
+  },
+  {
+    "exercise_name": "Plancha Frontal un apoyo alternando",
+    "slug": "plancha_frontal_un_apoyo_alternando",
+    "pdf": "Mercedes Toribio 09.03.2023.pdf",
+    "page": 2,
+    "row_top": 456.19561767578125,
+    "row_bottom": 562.0755615234375,
+    "bbox": [
+      272.67999267578125,
+      485.89898681640625,
+      386.9700012207031,
+      516.489990234375
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/plancha_frontal_un_apoyo_alternando.png",
+    "score": 31899
+  },
+  {
+    "exercise_name": "Plancha lateral",
+    "slug": "plancha_lateral",
+    "pdf": "Mercedes Toribio 30.03.2023.pdf",
+    "page": 2,
+    "row_top": 564.3155517578125,
+    "row_bottom": 663.74560546875,
+    "bbox": [
+      278.29998779296875,
+      578.3930053710938,
+      399.6099853515625,
+      641.3099975585938
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/plancha_lateral.png",
+    "score": 68985
+  },
+  {
+    "exercise_name": "Press Francés mancuernas",
+    "slug": "press_frances_mancuernas",
+    "pdf": "DOSIS DE EJERCICIO ISABEL VENTURA 21-02-2023.pdf",
+    "page": 2,
+    "row_top": 564.7955932617188,
+    "row_bottom": 839.9199829101562,
+    "bbox": [
+      292.9200134277344,
+      569.6180419921875,
+      368.78399658203125,
+      645.27001953125
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/press_frances_mancuernas.png",
+    "score": 52212
+  },
+  {
+    "exercise_name": "Press militar",
+    "slug": "press_militar",
+    "pdf": "Mercedes Toribio 16.03.2023.pdf",
+    "page": 2,
+    "row_top": 462.4356384277344,
+    "row_bottom": 562.0755615234375,
+    "bbox": [
+      270.3599853515625,
+      465.38800048828125,
+      393.1499938964844,
+      552.239990234375
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/press_militar.png",
+    "score": 96309
+  },
+  {
+    "exercise_name": "Press militar mancuernas",
+    "slug": "press_militar_mancuernas",
+    "pdf": "Mercedes Toribio 30.03.2023.pdf",
+    "page": 2,
+    "row_top": 360.775634765625,
+    "row_bottom": 460.4356384277344,
+    "bbox": [
+      276.9800109863281,
+      360.4579772949219,
+      400.760009765625,
+      444.7499694824219
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/press_militar_mancuernas.png",
+    "score": 94742
+  },
+  {
+    "exercise_name": "Press vertical uniltareal",
+    "slug": "press_vertical_uniltareal",
+    "pdf": "Mercedes Toribio 13.04.2023.pdf",
+    "page": 2,
+    "row_top": 360.775634765625,
+    "row_bottom": 460.4356384277344,
+    "bbox": [
+      274.54998779296875,
+      360.4579772949219,
+      400.760009765625,
+      444.7499694824219
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/press_vertical_uniltareal.png",
+    "score": 96520
+  },
+  {
+    "exercise_name": "Puente",
+    "slug": "puente",
+    "pdf": "Mercedes Toribio 13.04.2023.pdf",
+    "page": 2,
+    "row_top": 259.1356506347656,
+    "row_bottom": 358.775634765625,
+    "bbox": [
+      282.4800109863281,
+      257.052001953125,
+      390.32000732421875,
+      343.0799865722656
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/puente.png",
+    "score": 83916
+  },
+  {
+    "exercise_name": "Puente 1 pierna",
+    "slug": "puente_1_pierna",
+    "pdf": "Mercedes Toribio 23.03.2023.pdf",
+    "page": 2,
+    "row_top": 259.1356506347656,
+    "row_bottom": 358.775634765625,
+    "bbox": [
+      272.8299865722656,
+      277.16595458984375,
+      395.69000244140625,
+      322.469970703125
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/puente_1_pierna.png",
+    "score": 50690
+  },
+  {
+    "exercise_name": "Puente (Glúteo)",
+    "slug": "puente_gluteo",
+    "pdf": "Mercedes Toribio 13.04.2023.pdf",
+    "page": 1,
+    "row_top": 391.255615234375,
+    "row_bottom": 490.9156188964844,
+    "bbox": [
+      281.75,
+      388.0569763183594,
+      394.010009765625,
+      477.469970703125
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/puente_gluteo.png",
+    "score": 90922
+  },
+  {
+    "exercise_name": "Puente isoétrico un apoyo",
+    "slug": "puente_isoetrico_un_apoyo",
+    "pdf": "Mercedes Toribio 09.03.2023.pdf",
+    "page": 2,
+    "row_top": 564.0755615234375,
+    "row_bottom": 663.985595703125,
+    "bbox": [
+      289.3599853515625,
+      568.280029296875,
+      385.99200439453125,
+      645.4400024414062
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/puente_isoetrico_un_apoyo.png",
+    "score": 67570
+  },
+  {
+    "exercise_name": "Push press unilateral",
+    "slug": "push_press_unilateral",
+    "pdf": "Mercedes Toribio 09.03.2023.pdf",
+    "page": 2,
+    "row_top": 360.775634765625,
+    "row_bottom": 454.19561767578125,
+    "bbox": [
+      282.79998779296875,
+      361.07098388671875,
+      391.5699768066406,
+      445.6299743652344
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/push_press_unilateral.png",
+    "score": 83058
+  },
+  {
+    "exercise_name": "Remo con barra prono",
+    "slug": "remo_con_barra_prono",
+    "pdf": "Mercedes Toribio 23.03.2023.pdf",
+    "page": 2,
+    "row_top": 564.0755615234375,
+    "row_bottom": 663.74560546875,
+    "bbox": [
+      270.55999755859375,
+      569.9099731445312,
+      397.32000732421875,
+      638.75
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/remo_con_barra_prono.png",
+    "score": 79248
+  },
+  {
+    "exercise_name": "Remo con mancuerna",
+    "slug": "remo_con_mancuerna",
+    "pdf": "Mercedes Toribio 30.03.2023.pdf",
+    "page": 2,
+    "row_top": 462.4356384277344,
+    "row_bottom": 562.3155517578125,
+    "bbox": [
+      269.6400146484375,
+      479.1869812011719,
+      397.32000732421875,
+      534.2999877929688
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/remo_con_mancuerna.png",
+    "score": 63744
+  },
+  {
+    "exercise_name": "Remo horizontal con goma",
+    "slug": "remo_horizontal_con_goma",
+    "pdf": "Mercedes Toribio 09.03.2023.pdf",
+    "page": 2,
+    "row_top": 665.985595703125,
+    "row_bottom": 839.9199829101562,
+    "bbox": [
+      273.6000061035156,
+      664.1179809570312,
+      391.08001708984375,
+      747.8779907226562
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/remo_horizontal_con_goma.png",
+    "score": 89208
+  },
+  {
+    "exercise_name": "Sentadilla Bulgara globet",
+    "slug": "sentadilla_bulgara_globet",
+    "pdf": "DOSIS DE EJERCICIO ISABEL VENTURA 21-02-2023.pdf",
+    "page": 2,
+    "row_top": 157.70559692382812,
+    "row_bottom": 257.1356506347656,
+    "bbox": [
+      291.7300109863281,
+      170.13795471191406,
+      386.14501953125,
+      236.38995361328125
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/sentadilla_bulgara_globet.png",
+    "score": 56800
+  },
+  {
+    "exercise_name": "Sentadilla Libre SIN PESO",
+    "slug": "sentadilla_libre_sin_peso",
+    "pdf": "Mercedes Toribio 13.04.2023.pdf",
+    "page": 1,
+    "row_top": 594.5556030273438,
+    "row_bottom": 839.9199829101562,
+    "bbox": [
+      306.4100036621094,
+      592.5589599609375,
+      378.3840026855469,
+      677.4099731445312
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/sentadilla_libre_sin_peso.png",
+    "score": 55552
+  },
+  {
+    "exercise_name": "Sumo Walk",
+    "slug": "sumo_walk",
+    "pdf": "DOSIS DE EJERCICIO ISABEL VENTURA 21-02-2023.pdf",
+    "page": 1,
+    "row_top": 492.9156188964844,
+    "row_bottom": 592.5556030273438,
+    "bbox": [
+      289.67999267578125,
+      492.3599853515625,
+      392.9029846191406,
+      576.8399658203125
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/sumo_walk.png",
+    "score": 78740
+  },
+  {
+    "exercise_name": "Tracción TRX",
+    "slug": "traccion_trx",
+    "pdf": "DOSIS DE EJERCICIO ISABEL VENTURA 21-02-2023.pdf",
+    "page": 2,
+    "row_top": 361.015625,
+    "row_bottom": 461.1556091308594,
+    "bbox": [
+      277.6700134277344,
+      375.8489990234375,
+      392.1000061035156,
+      435.55999755859375
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/traccion_trx.png",
+    "score": 61920
+  },
+  {
+    "exercise_name": "Tracción TRX 1 pierna",
+    "slug": "traccion_trx_1_pierna",
+    "pdf": "Mercedes Toribio 26.04.2023.pdf",
+    "page": 2,
+    "row_top": 462.4356384277344,
+    "row_bottom": 562.0755615234375,
+    "bbox": [
+      266.4200134277344,
+      471.52099609375,
+      398.1700134277344,
+      537.0599975585938
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/traccion_trx_1_pierna.png",
+    "score": 78408
+  },
+  {
+    "exercise_name": "Wall Squat isométrico",
+    "slug": "wall_squat_isometrico",
+    "pdf": "DOSIS DE EJERCICIO ISABEL VENTURA 21-02-2023.pdf",
+    "page": 1,
+    "row_top": 594.5556030273438,
+    "row_bottom": 839.9199829101562,
+    "bbox": [
+      304.7200012207031,
+      593.2769775390625,
+      387.2799987792969,
+      675.97998046875
+    ],
+    "output": "C:/Users/Indurex/Downloads/rutinas-ejercicio/imgs/wall_squat_isometrico.png",
+    "score": 61752
+  }
+]
