@@ -152,10 +152,7 @@
 <main>
   <!-- PAGE: RUTINAS -->
   <div class="page active" id="page-rutinas">
-    <div class="week-header">
-      
-    </div>
-
+  
     <div class="routine-controls">
       <div class="routine-controls-left">
         <div class="routine-controls-title" id="routine-title">Rutina automática</div>
@@ -458,7 +455,7 @@ function renderRoutineSelector() {
   document.getElementById('routine-subtitle').textContent = manualId
     ? `Pulsa “Usar automática” para volver al ciclo semanal. Esquema: ${routine.schema}`
     : `Semana ${weekNumber} del ciclo · esquema: ${routine.schema}`;
-  document.getElementById('week-status').textContent = `Mercedes Toribio · ciclo automático desde ${formatDateES(PROGRAM_START_DATE)} · automática: ${autoId}`;
+  
 }
 
 function formatDateES(isoDate) {
