@@ -8,17 +8,17 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f0f0f;
-    --bg2: #1a1a1a;
-    --bg3: #242424;
-    --border: #2e2e2e;
-    --accent: #c8f560;
-    --accent2: #7dd3fc;
-    --text: #f0f0f0;
-    --muted: #888;
-    --danger: #f87171;
-    --fza: #fbbf24;
-    --ae: #60a5fa;
+    --bg: #f5f5f2;
+    --bg2: #ffffff;
+    --bg3: #eeecea;
+    --border: #dddbd8;
+    --accent: #2d7a2d;
+    --accent2: #1a6fa8;
+    --text: #1a1a1a;
+    --muted: #7a7672;
+    --danger: #c0392b;
+    --fza: #b45309;
+    --ae: #1a6fa8;
     --radius: 12px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,7 +30,7 @@
   .nav-tabs { display: flex; gap: 4px; }
   .nav-tab { background: none; border: none; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 6px 14px; border-radius: 8px; cursor: pointer; transition: all .15s; }
   .nav-tab:hover { color: var(--text); background: var(--bg3); }
-  .nav-tab.active { color: var(--accent); background: rgba(200,245,96,.08); }
+  .nav-tab.active { color: var(--accent); background: rgba(45,122,45,.08); }
 
   /* MAIN */
   main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
@@ -41,13 +41,13 @@
   .week-header span { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
   .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 2.5rem; }
   .day-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 10px; text-align: center; cursor: pointer; transition: all .2s; }
-  .day-card:hover { border-color: #444; background: var(--bg3); }
-  .day-card.active { border-color: var(--accent); background: rgba(200,245,96,.06); }
+  .day-card:hover { border-color: #bbb; background: var(--bg3); }
+  .day-card.active { border-color: var(--accent); background: rgba(45,122,45,.07); }
   .day-card.rest { opacity: .4; cursor: default; }
   .day-name { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
   .day-type { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; display: inline-block; }
-  .day-type.fza { background: rgba(251,191,36,.15); color: var(--fza); }
-  .day-type.ae { background: rgba(96,165,250,.15); color: var(--ae); }
+  .day-type.fza { background: rgba(180,83,9,.1); color: var(--fza); }
+  .day-type.ae { background: rgba(26,111,168,.1); color: var(--ae); }
   .day-type.des { background: var(--bg3); color: var(--muted); }
 
   /* ROUTINE VIEW */
@@ -71,24 +71,24 @@
   .check-btn { width: 24px; height: 24px; border-radius: 6px; border: 1.5px solid var(--border); background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .2s; }
   .check-btn:hover { border-color: var(--accent); }
   .check-btn.checked { background: var(--accent); border-color: var(--accent); }
-  .check-btn.checked::after { content: '✓'; color: #0f0f0f; font-size: 13px; font-weight: 700; }
+  .check-btn.checked::after { content: '✓'; color: #fff; font-size: 13px; font-weight: 700; }
   .ex-info { flex: 1; min-width: 0; }
   .ex-name { font-size: 15px; font-weight: 500; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .ex-dose { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
   .ex-badges { display: flex; gap: 6px; flex-shrink: 0; }
   .badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-family: 'DM Mono', monospace; }
-  .badge.series { background: rgba(200,245,96,.1); color: var(--accent); }
-  .badge.time { background: rgba(125,211,252,.1); color: var(--accent2); cursor: pointer; transition: background .2s; }
-  .badge.time:hover { background: rgba(125,211,252,.2); }
+  .badge.series { background: rgba(45,122,45,.1); color: var(--accent); }
+  .badge.time { background: rgba(26,111,168,.1); color: var(--accent2); cursor: pointer; transition: background .2s; }
+  .badge.time:hover { background: rgba(26,111,168,.2); }
   .expand-arrow { color: var(--muted); font-size: 12px; transition: transform .2s; flex-shrink: 0; }
   .exercise-card.open .expand-arrow { transform: rotate(180deg); }
   .exercise-body { padding: 0 16px 16px 54px; font-size: 13px; color: var(--muted); line-height: 1.6; border-top: 1px solid var(--border); padding-top: 12px; display: none; }
   .exercise-card.open .exercise-body { display: block; }
 
   /* TIMER */
-  .timer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 200; backdrop-filter: blur(4px); }
+  .timer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: none; align-items: center; justify-content: center; z-index: 200; backdrop-filter: blur(4px); }
   .timer-overlay.show { display: flex; }
-  .timer-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; text-align: center; min-width: 280px; }
+  .timer-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; text-align: center; min-width: 280px; box-shadow: 0 8px 32px rgba(0,0,0,.15); }
   .timer-exercise { font-size: 13px; color: var(--muted); margin-bottom: 1rem; }
   .timer-circle { width: 160px; height: 160px; margin: 0 auto 1.5rem; position: relative; }
   .timer-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
@@ -99,8 +99,8 @@
   .timer-controls { display: flex; gap: 10px; justify-content: center; }
   .timer-btn { padding: 10px 22px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; transition: all .15s; }
   .timer-btn:hover { background: #333; }
-  .timer-btn.primary { background: var(--accent); border-color: var(--accent); color: #0f0f0f; font-weight: 600; }
-  .timer-btn.primary:hover { background: #b4dd50; }
+  .timer-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .timer-btn.primary:hover { background: #236023; }
 
   /* CARDIO PAGE */
   .cardio-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
