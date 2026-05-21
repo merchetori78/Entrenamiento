@@ -8,19 +8,19 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-  --bg: #f7f7f3;
-  --bg2: #ffffff;
-  --bg3: #eeeee8;
-  --border: #ddd8cc;
-  --accent: #6b8e23;
-  --accent2: #2563eb;
-  --text: #1f2933;
-  --muted: #6b7280;
-  --danger: #dc2626;
-  --fza: #b45309;
-  --ae: #2563eb;
-  --radius: 12px;
-}
+    --bg: #0f0f0f;
+    --bg2: #1a1a1a;
+    --bg3: #242424;
+    --border: #2e2e2e;
+    --accent: #c8f560;
+    --accent2: #7dd3fc;
+    --text: #f0f0f0;
+    --muted: #888;
+    --danger: #f87171;
+    --fza: #fbbf24;
+    --ae: #60a5fa;
+    --radius: 12px;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
@@ -39,6 +39,14 @@
   .week-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 1.5rem; }
   .week-header h2 { font-size: 22px; font-weight: 500; }
   .week-header span { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .routine-controls { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .routine-controls-left { display: flex; flex-direction: column; gap: 3px; }
+  .routine-controls-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .routine-controls-subtitle { font-size: 12px; color: var(--muted); }
+  .routine-controls-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .routine-select { background: var(--bg3); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; }
+  .auto-btn { background: var(--accent); border: 1px solid var(--accent); color: #0f0f0f; border-radius: 10px; padding: 8px 12px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .auto-btn:hover { filter: brightness(.95); }
   .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 2.5rem; }
   .day-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 10px; text-align: center; cursor: pointer; transition: all .2s; }
   .day-card:hover { border-color: #444; background: var(--bg3); }
@@ -71,7 +79,7 @@
   .check-btn { width: 24px; height: 24px; border-radius: 6px; border: 1.5px solid var(--border); background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .2s; }
   .check-btn:hover { border-color: var(--accent); }
   .check-btn.checked { background: var(--accent); border-color: var(--accent); }
-  .check-btn.checked::after {  content: '✓';  color: #ffffff;  font-size: 13px;  font-weight: 700;}
+  .check-btn.checked::after { content: '✓'; color: #0f0f0f; font-size: 13px; font-weight: 700; }
   .ex-info { flex: 1; min-width: 0; }
   .ex-name { font-size: 15px; font-weight: 500; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .ex-dose { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
@@ -89,7 +97,7 @@
   .exercise-body-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
   /* TIMER */
-  .timer-overlay { position: fixed; inset: 0; background: rgba(255,255,255,.75); display: none; align-items: center; justify-content: center; z-index: 200; backdrop-filter: blur(4px); }
+  .timer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 200; backdrop-filter: blur(4px); }
   .timer-overlay.show { display: flex; }
   .timer-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; text-align: center; min-width: 280px; }
   .timer-exercise { font-size: 13px; color: var(--muted); margin-bottom: 1rem; }
@@ -102,7 +110,7 @@
   .timer-controls { display: flex; gap: 10px; justify-content: center; }
   .timer-btn { padding: 10px 22px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; transition: all .15s; }
   .timer-btn:hover { background: #333; }
-  .timer-btn.primary {  background: var(--accent);  border-color: var(--accent);  color: #ffffff;  font-weight: 600;}
+  .timer-btn.primary { background: var(--accent); border-color: var(--accent); color: #0f0f0f; font-weight: 600; }
   .timer-btn.primary:hover { background: #b4dd50; }
 
   /* CARDIO PAGE */
@@ -145,7 +153,18 @@
   <div class="page active" id="page-rutinas">
     <div class="week-header">
       <h2>Semana de entrenamiento</h2>
-      <span>Mercedes Toribio · desde 09/03/2023</span>
+      <span id="week-status">Mercedes Toribio · rutina automática</span>
+    </div>
+
+    <div class="routine-controls">
+      <div class="routine-controls-left">
+        <div class="routine-controls-title" id="routine-title">Rutina automática</div>
+        <div class="routine-controls-subtitle" id="routine-subtitle">La app calcula la rutina según la semana actual.</div>
+      </div>
+      <div class="routine-controls-actions">
+        <select class="routine-select" id="routine-selector" onchange="selectRoutineManual(this.value)" aria-label="Elegir rutina"></select>
+        <button class="auto-btn" onclick="useAutomaticRoutine()">Usar automática</button>
+      </div>
     </div>
 
     <div class="week-grid" id="week-grid"></div>
@@ -353,17 +372,99 @@ const ROUTINES = [
   }
 ];
 
-// Weekly schema: each array = [routine_id, day_label]
-// Based on documents: week 1 → Fza/Ae/Fza/Ae/Ae/Descanso, week 2 → Ae/Fza/Ae/Fza/Ae/Descanso, etc.
-const WEEK = [
-  { day: 'Lun', routine: 'A', type: 'fza' },
-  { day: 'Mar', routine: null, type: 'ae', label: 'Ae' },
-  { day: 'Mié', routine: 'B', type: 'fza' },
-  { day: 'Jue', routine: null, type: 'ae', label: 'Ae' },
-  { day: 'Vie', routine: 'C', type: 'fza' },
-  { day: 'Sáb', routine: null, type: 'des', label: '—' },
-  { day: 'Dom', routine: null, type: 'des', label: '—' },
-];
+// ========== WEEKLY AUTO PROGRAM ==========
+// Cambia esta fecha si quieres reiniciar el ciclo desde otro lunes.
+const PROGRAM_START_DATE = '2023-03-09';
+const DAY_NAMES = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+
+function getWeeksSinceStart() {
+  const start = new Date(PROGRAM_START_DATE + 'T00:00:00');
+  const today = new Date();
+  const startMonday = getMonday(start);
+  const todayMonday = getMonday(today);
+  const diffMs = todayMonday - startMonday;
+  return Math.max(0, Math.floor(diffMs / (7 * 24 * 60 * 60 * 1000)));
+}
+
+function getMonday(date) {
+  const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+function getAutoRoutineId() {
+  const weekNumber = getWeeksSinceStart();
+  return ROUTINES[weekNumber % ROUTINES.length].id;
+}
+
+function getActiveRoutineId() {
+  return localStorage.getItem('mr_manual_routine') || getAutoRoutineId();
+}
+
+function getSchemaParts(routine) {
+  return routine.schema
+    .split('·')
+    .map(part => part.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+function getCurrentWeek() {
+  const routineId = getActiveRoutineId();
+  const routine = ROUTINES.find(r => r.id === routineId) || ROUTINES[0];
+  const parts = getSchemaParts(routine);
+  return DAY_NAMES.map((day, idx) => {
+    const part = parts[idx] || '—';
+    if (part.includes('fza')) return { day, routine: routine.id, type: 'fza', label: 'Fza' };
+    if (part.includes('ae')) return { day, routine: null, type: 'ae', label: 'Ae' };
+    return { day, routine: null, type: 'des', label: '—' };
+  });
+}
+
+function getTodayIndexMondayFirst() {
+  const jsDay = new Date().getDay();
+  return jsDay === 0 ? 6 : jsDay - 1;
+}
+
+function selectRoutineManual(routineId) {
+  localStorage.setItem('mr_manual_routine', routineId);
+  renderRoutineSelector();
+  renderWeek();
+  selectBestDayForCurrentWeek();
+}
+
+function useAutomaticRoutine() {
+  localStorage.removeItem('mr_manual_routine');
+  renderRoutineSelector();
+  renderWeek();
+  selectBestDayForCurrentWeek();
+}
+
+function renderRoutineSelector() {
+  const selector = document.getElementById('routine-selector');
+  const activeId = getActiveRoutineId();
+  const autoId = getAutoRoutineId();
+  const manualId = localStorage.getItem('mr_manual_routine');
+  const weekNumber = getWeeksSinceStart() + 1;
+  const routine = ROUTINES.find(r => r.id === activeId) || ROUTINES[0];
+
+  selector.innerHTML = ROUTINES.map(r => `<option value="${r.id}" ${r.id === activeId ? 'selected' : ''}>Rutina ${r.id}</option>`).join('');
+
+  document.getElementById('routine-title').textContent = manualId
+    ? `Rutina ${activeId} seleccionada manualmente`
+    : `Rutina automática de esta semana: ${activeId}`;
+  document.getElementById('routine-subtitle').textContent = manualId
+    ? `Pulsa “Usar automática” para volver al ciclo semanal. Esquema: ${routine.schema}`
+    : `Semana ${weekNumber} del ciclo · esquema: ${routine.schema}`;
+  document.getElementById('week-status').textContent = `Mercedes Toribio · ciclo automático desde ${formatDateES(PROGRAM_START_DATE)} · automática: ${autoId}`;
+}
+
+function formatDateES(isoDate) {
+  const [year, month, day] = isoDate.split('-');
+  return `${day}/${month}/${year}`;
+}
 
 // ========== STATE ==========
 let currentRoutineIdx = null;
@@ -376,7 +477,6 @@ let timerTotal = 0;
 let timerRemaining = 0;
 let timerRunning = false;
 let timerExName = '';
-
 
 // ========== IMAGES ==========
 function slugifyExerciseName(text) {
@@ -399,8 +499,9 @@ function exerciseImageSrc(name) {
 // ========== RENDER WEEK ==========
 function renderWeek() {
   const grid = document.getElementById('week-grid');
+  const week = getCurrentWeek();
   grid.innerHTML = '';
-  WEEK.forEach((d, i) => {
+  week.forEach((d, i) => {
     const div = document.createElement('div');
     div.className = 'day-card' + (d.type === 'des' ? ' rest' : '') + (currentRoutineIdx === i ? ' active' : '');
     const typeLabel = d.type === 'fza' ? 'Fza' : d.type === 'ae' ? 'Ae' : '—';
@@ -410,10 +511,22 @@ function renderWeek() {
   });
 }
 
+function selectBestDayForCurrentWeek() {
+  const week = getCurrentWeek();
+  const todayIdx = getTodayIndexMondayFirst();
+  if (week[todayIdx] && week[todayIdx].type !== 'des') {
+    selectDay(todayIdx);
+    return;
+  }
+  const firstTrainingDay = week.findIndex(d => d.type !== 'des');
+  selectDay(firstTrainingDay >= 0 ? firstTrainingDay : 0);
+}
+
 function selectDay(i) {
+  const week = getCurrentWeek();
   currentRoutineIdx = i;
   renderWeek();
-  const day = WEEK[i];
+  const day = week[i];
   if (day.type === 'ae') {
     showAerobicDay(i);
   } else if (day.routine) {
@@ -423,11 +536,14 @@ function selectDay(i) {
 }
 
 function showAerobicDay(i) {
+  const week = getCurrentWeek();
+  const activeRoutine = ROUTINES.find(r => r.id === getActiveRoutineId()) || ROUTINES[0];
   const view = document.getElementById('routine-view');
   view.innerHTML = `
     <div class="routine-meta">
       <span class="meta-pill"><strong>Tipo</strong> Aeróbico</span>
-      <span class="meta-pill"><strong>Día</strong> ${WEEK[i].day}</span>
+      <span class="meta-pill"><strong>Día</strong> ${week[i].day}</span>
+      <span class="meta-pill"><strong>Rutina semanal</strong> ${activeRoutine.id}</span>
     </div>
     <div class="cardio-card" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
       <h3 style="font-size:15px;font-weight:500;margin-bottom:6px;">Sesión cardiovascular</h3>
@@ -589,8 +705,9 @@ function formatTime(s) {
 }
 
 // ========== INIT ==========
+renderRoutineSelector();
 renderWeek();
-selectDay(0);
+selectBestDayForCurrentWeek();
 </script>
 </body>
 </html>
