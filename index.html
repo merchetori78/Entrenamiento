@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutinas · Mario Redondo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --bg2: #1a1a1a;
+    --bg3: #242424;
+    --border: #2e2e2e;
+    --accent: #c8f560;
+    --accent2: #7dd3fc;
+    --text: #f0f0f0;
+    --muted: #888;
+    --danger: #f87171;
+    --fza: #fbbf24;
+    --ae: #60a5fa;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* NAV */
+  nav { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 58px; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 0.05em; }
+  .nav-tabs { display: flex; gap: 4px; }
+  .nav-tab { background: none; border: none; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 6px 14px; border-radius: 8px; cursor: pointer; transition: all .15s; }
+  .nav-tab:hover { color: var(--text); background: var(--bg3); }
+  .nav-tab.active { color: var(--accent); background: rgba(200,245,96,.08); }
+
+  /* MAIN */
+  main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  /* WEEK GRID */
+  .week-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 1.5rem; }
+  .week-header h2 { font-size: 22px; font-weight: 500; }
+  .week-header span { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 2.5rem; }
+  .day-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 10px; text-align: center; cursor: pointer; transition: all .2s; }
+  .day-card:hover { border-color: #444; background: var(--bg3); }
+  .day-card.active { border-color: var(--accent); background: rgba(200,245,96,.06); }
+  .day-card.rest { opacity: .4; cursor: default; }
+  .day-name { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+  .day-type { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; display: inline-block; }
+  .day-type.fza { background: rgba(251,191,36,.15); color: var(--fza); }
+  .day-type.ae { background: rgba(96,165,250,.15); color: var(--ae); }
+  .day-type.des { background: var(--bg3); color: var(--muted); }
+
+  /* ROUTINE VIEW */
+  .routine-meta { display: flex; gap: 12px; margin-bottom: 2rem; flex-wrap: wrap; }
+  .meta-pill { font-size: 12px; font-family: 'DM Mono', monospace; background: var(--bg2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 20px; color: var(--muted); }
+  .meta-pill strong { color: var(--text); }
+
+  /* PROGRESS */
+  .progress-bar-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 2rem; }
+  .progress-label { font-size: 12px; color: var(--muted); margin-bottom: 8px; display: flex; justify-content: space-between; }
+  .progress-track { background: var(--bg3); border-radius: 4px; height: 6px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width .4s ease; }
+
+  /* EXERCISES */
+  .section-label { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+  .exercise-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem; }
+  .exercise-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color .2s; }
+  .exercise-card.done { border-color: rgba(200,245,96,.3); opacity: .6; }
+  .exercise-card.done .ex-name { text-decoration: line-through; color: var(--muted); }
+  .exercise-header { display: flex; align-items: center; gap: 14px; padding: 14px 16px; cursor: pointer; }
+  .check-btn { width: 24px; height: 24px; border-radius: 6px; border: 1.5px solid var(--border); background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .2s; }
+  .check-btn:hover { border-color: var(--accent); }
+  .check-btn.checked { background: var(--accent); border-color: var(--accent); }
+  .check-btn.checked::after { content: '✓'; color: #0f0f0f; font-size: 13px; font-weight: 700; }
+  .ex-info { flex: 1; min-width: 0; }
+  .ex-name { font-size: 15px; font-weight: 500; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ex-dose { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .ex-badges { display: flex; gap: 6px; flex-shrink: 0; }
+  .badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-family: 'DM Mono', monospace; }
+  .badge.series { background: rgba(200,245,96,.1); color: var(--accent); }
+  .badge.time { background: rgba(125,211,252,.1); color: var(--accent2); cursor: pointer; transition: background .2s; }
+  .badge.time:hover { background: rgba(125,211,252,.2); }
+  .expand-arrow { color: var(--muted); font-size: 12px; transition: transform .2s; flex-shrink: 0; }
+  .exercise-card.open .expand-arrow { transform: rotate(180deg); }
+  .exercise-body { padding: 0 16px 16px 54px; font-size: 13px; color: var(--muted); line-height: 1.6; border-top: 1px solid var(--border); padding-top: 12px; display: none; }
+  .exercise-card.open .exercise-body { display: block; }
+
+  /* TIMER */
+  .timer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 200; backdrop-filter: blur(4px); }
+  .timer-overlay.show { display: flex; }
+  .timer-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; text-align: center; min-width: 280px; }
+  .timer-exercise { font-size: 13px; color: var(--muted); margin-bottom: 1rem; }
+  .timer-circle { width: 160px; height: 160px; margin: 0 auto 1.5rem; position: relative; }
+  .timer-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .timer-track { fill: none; stroke: var(--bg3); stroke-width: 8; }
+  .timer-progress { fill: none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset .95s linear; }
+  .timer-countdown { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 38px; font-weight: 500; color: var(--text); }
+  .timer-label { font-size: 12px; color: var(--muted); margin-bottom: 1.5rem; font-family: 'DM Mono', monospace; letter-spacing: .05em; }
+  .timer-controls { display: flex; gap: 10px; justify-content: center; }
+  .timer-btn { padding: 10px 22px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; transition: all .15s; }
+  .timer-btn:hover { background: #333; }
+  .timer-btn.primary { background: var(--accent); border-color: var(--accent); color: #0f0f0f; font-weight: 600; }
+  .timer-btn.primary:hover { background: #b4dd50; }
+
+  /* CARDIO PAGE */
+  .cardio-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+  .cardio-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  .cardio-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* EMPTY STATE */
+  .empty { text-align: center; padding: 4rem 2rem; color: var(--muted); }
+  .empty-icon { font-size: 40px; margin-bottom: 1rem; opacity: .3; }
+
+  /* PAGE SECTION */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* Reset button */
+  .reset-btn { background: none; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); padding: 6px 14px; font-size: 12px; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all .2s; }
+  .reset-btn:hover { border-color: var(--danger); color: var(--danger); }
+
+  @media (max-width: 600px) {
+    .week-grid { grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .day-card { padding: 10px 4px; }
+    .day-name { font-size: 9px; }
+    .day-type { font-size: 9px; padding: 2px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">MARIO REDONDO · EXERCISE</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('rutinas')">Rutinas</button>
+    <button class="nav-tab" onclick="showPage('cardio')">Cardio</button>
+  </div>
+</nav>
+
+<main>
+  <!-- PAGE: RUTINAS -->
+  <div class="page active" id="page-rutinas">
+    <div class="week-header">
+      <h2>Semana de entrenamiento</h2>
+      <span>Mercedes Toribio · desde 09/03/2023</span>
+    </div>
+
+    <div class="week-grid" id="week-grid"></div>
+
+    <div id="routine-view"></div>
+  </div>
+
+  <!-- PAGE: CARDIO -->
+  <div class="page" id="page-cardio">
+    <div class="week-header">
+      <h2>Trabajo cardiovascular</h2>
+    </div>
+    <div class="cardio-card">
+      <h3>Objetivo semanal OMS / ACSM</h3>
+      <p>150 min semanales de ejercicio cardiovascular de baja intensidad (40–60% VO₂Máx) o 75 min de moderada-alta intensidad (60–80% VO₂Máx). Lo ideal: 5 días/semana de 30 min, o bloques de al menos 10 min acumulando 30 min totales.</p>
+    </div>
+    <div class="cardio-card">
+      <h3>Instrucción diaria</h3>
+      <p>Todos los días sal a andar al menos 30 min a buen ritmo, rápido dentro de tus posibilidades. Debes poder llevar una conversación entrecortada (intensidad ~60% VO₂Máx).</p>
+    </div>
+    <div class="cardio-card">
+      <h3>Opciones de máquina</h3>
+      <p>Al 40% VO₂Máx: pedalear o andar a buen ritmo en bicicleta estática, cinta u otro aparato cardiovascular.</p>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <div class="section-label">Temporizador cardio</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="timer-btn primary" onclick="openTimer('Cardio — Caminata', 30*60)">▶ 30 min caminata</button>
+        <button class="timer-btn" onclick="openTimer('Cardio — Bloque 10 min', 10*60)">10 min bloque</button>
+        <button class="timer-btn" onclick="openTimer('Cardio — 20 min', 20*60)">20 min</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- TIMER OVERLAY -->
+<div class="timer-overlay" id="timer-overlay">
+  <div class="timer-box">
+    <div class="timer-exercise" id="timer-ex-name">Plancha Frontal</div>
+    <div class="timer-circle">
+      <svg class="timer-svg" viewBox="0 0 100 100">
+        <circle class="timer-track" cx="50" cy="50" r="42"/>
+        <circle class="timer-progress" id="timer-arc" cx="50" cy="50" r="42" stroke-dasharray="263.9" stroke-dashoffset="0"/>
+      </svg>
+      <div class="timer-countdown" id="timer-display">00:00</div>
+    </div>
+    <div class="timer-label" id="timer-phase-label">listo</div>
+    <div class="timer-controls">
+      <button class="timer-btn" onclick="closeTimer()">Cerrar</button>
+      <button class="timer-btn primary" id="timer-toggle-btn" onclick="toggleTimer()">Iniciar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ========== DATA ==========
+const ROUTINES = [
+  {
+    id: 'A',
+    label: 'Fza',
+    type: 'fza',
+    schema: 'Fza · Ae · Fza · Ae · Ae · — · —',
+    methodology: 'Vertical',
+    warmup: 'Los 4 primeros ejercicios como movilidad articular',
+    exercises: [
+      { name: 'Gato/Camello', series: 2, reps: '15', rest: 0, timed: false, instructions: 'Coges aire mientras sacas pecho, miras arriba y realizas una anteversión de la pelvis y lordosis lumbar. A continuación exhalas, metes el ombligo hacia tu zona lumbar, miras abajo y redondeas la columna como si te tiraran del techo.' },
+      { name: 'Movilidad Torácica', series: 2, reps: '10 por lado', rest: 0, timed: false, instructions: 'Posición de cuadrupedia, rodillas y caderas a 90°. Mano en la nuca y sin mover pelvis llevas el codo al techo y mirada al lateral. Al volver pasas la mano por debajo del brazo contrario para rotar en sentido contrario.' },
+      { name: 'Plancha Frontal', series: 2, reps: '25"', rest: 0, timed: true, seconds: 25, instructions: 'Mantener hombro-cadera-rodilla y tobillo en una línea. Mantener retroversión de la pelvis y contraer glúteos.' },
+      { name: 'Sentadilla Libre SIN PESO', series: 2, reps: '12 sin carga', rest: 0, timed: false, instructions: 'Ponte un banco atrás para tener referencia y roza con glúteo. Saca pecho, mirada al frente y lordosis lumbar. Empuja con todo el pie. Abre puntas de pies y separa rodillas si tienes limitaciones de movimiento.' },
+      { name: 'Sentadilla con barra a cajón', series: 3, reps: '10 × dos mancuernas 8kg', rest: 0, timed: false, instructions: 'Igual que la sentadilla libre. Empuja con todo el pie, saca pecho, lordosis lumbar durante todo el ejercicio.' },
+      { name: 'Fondos de rodilla', series: 3, reps: '10', rest: 0, timed: false, instructions: 'Mantener retroversión pelvis, ir como una tabla. Hombros, caderas y rodillas en línea. Codos más abajo formando un ángulo de 45° con axila. Manos por debajo de hombros. Ir a tocar con cara o pecho, no con pelvis.' },
+      { name: 'Press Militar Mancuernas', series: 3, reps: '10 × dos mancuernas 5kg', rest: 0, timed: false, instructions: 'Bajas hasta tocar hombros y empuja sin llegar a bloquearlos en posición final. Saca pecho en todo el recorrido. Banco a una inclinación de 75° aproximadamente, no 90°.' },
+      { name: 'Peso Muerto Rumano con Barra', series: 3, reps: '10 × dos mancuernas 8kg', rest: 0, timed: false, instructions: 'Flexiona ligeramente las rodillas de tal manera que el movimiento domine de cadera. Baja con la barra pegada a tu cuerpo en todo el recorrido y con mirada abajo. Cuando notes la tensión en los isquiotibiales, sube.' },
+      { name: 'Remo con Mancuerna', series: 3, reps: '10 por mano × 8kg', rest: 0, timed: false, instructions: 'Sacar pecho, mantener lordosis lumbar, llevar mancuerna a la cadera. Pierna muy atrás y mano contralateral apoyada en banco. Mirada abajo para mantener columna neutra. No rotar el tronco al hacer fuerza.' },
+      { name: 'Plancha Lateral', series: 3, reps: '20" por lado', rest: 0, timed: true, seconds: 20, instructions: 'Empujar con la cadera y mantener en línea cabeza, ombligo, pubis y pies.' },
+      { name: 'Hollow Alternando Piernas', series: 3, reps: '20 alternas', rest: 0, timed: false, instructions: 'Mantener la posición hollow y alternar el movimiento de las piernas tal como aparece en la imagen.' },
+    ]
+  },
+  {
+    id: 'B',
+    label: 'Fza',
+    type: 'fza',
+    schema: 'Ae · Fza · Ae · Fza · Ae · — · —',
+    methodology: 'Vertical',
+    warmup: 'Los 4 primeros ejercicios como movilidad articular',
+    exercises: [
+      { name: 'Gato/Camello', series: 2, reps: '15', rest: 0, timed: false, instructions: 'Coges aire mientras sacas pecho, miras arriba y realizas una anteversión de la pelvis y lordosis lumbar. A continuación exhalas, metes el ombligo y redondeas la columna.' },
+      { name: 'Movilidad Torácica', series: 2, reps: '10 por lado', rest: 0, timed: false, instructions: 'Cuadrupedia, rodillas y caderas a 90°. Mano en nuca, lleva codo al techo sin mover pelvis. Al volver pasa la mano por debajo del brazo contrario.' },
+      { name: 'Plancha Frontal', series: 2, reps: '25"', rest: 0, timed: true, seconds: 25, instructions: 'Mantener hombro-cadera-rodilla-tobillo en línea. Retroversión de pelvis y contraer glúteos.' },
+      { name: 'Bird Dog', series: 2, reps: '20', rest: 0, timed: false, instructions: 'En posición de cuadrupedia eleva brazo y pierna contraria sin que la pelvis ni los hombros roten.' },
+      { name: 'Plancha Cuadrupedia', series: 3, reps: '25" trabajo · 15" descanso · 25" trabajo', rest: 15, timed: true, seconds: 25, instructions: 'En posición de cuadrupedia levanta tu peso para que las rodillas estén en el aire sin contacto con el suelo. Recuerda proyectar la cadera hacia arriba.' },
+      { name: 'Remo con Barra Prono', series: 3, reps: '8 × dos mancuernas 6kg', rest: 0, timed: false, instructions: 'Ligera flexión de rodilla, mantener espalda con lordosis lumbar. Traccionar barra y llevarla a caderas u ombligo. Nunca curvar la espalda y mirada abajo. Juntar escápulas al final del movimiento.' },
+      { name: 'Bicho Muerto', series: 3, reps: '20 alternando piernas × disco 2kg en manos', rest: 0, timed: false, instructions: 'Cintura pélvica y cintura escapular no rotan en ningún momento. Abdomen completamente bloqueado. Baja la pierna sin arquear la espalda.' },
+      { name: 'Press Vertical Unilateral', series: 3, reps: '6 × una mancuerna 6kg', rest: 0, timed: false, instructions: 'Realizar una posición semiarrodillado donde debes hacer un empuje vertical a una mano con mancuerna.' },
+      { name: 'Puente 1 Pierna', series: 3, reps: '10 por pierna × dos mancuernas 6kg en caderas', rest: 0, timed: false, instructions: 'Contraer el glúteo de forma voluntaria en todo el recorrido. Mantener rodillas a la anchura de caderas, no juntarlas. Evitar que la pelvis caiga o rote.' },
+      { name: 'Fondos de Rodilla', series: 3, reps: '12', rest: 0, timed: false, instructions: 'Mantener retroversión pelvis, ir como una tabla. Ángulo de 45° con axila. Ir a tocar con cara o pecho, no con pelvis.' },
+      { name: 'Zancada al Frente con Barra', series: 3, reps: '10 por pierna × dos mancuernas 6kg', rest: 0, timed: false, instructions: 'Desde parado, zancadas al frente y empuja fuerte el suelo para volver a la posición inicial.' },
+    ]
+  },
+  {
+    id: 'C',
+    label: 'Fza',
+    type: 'fza',
+    schema: 'Fza · Ae · Ae · Fza · Ae · — · —',
+    methodology: 'Vertical',
+    warmup: 'Los 4 primeros ejercicios como movilidad articular',
+    exercises: [
+      { name: 'Gato/Camello', series: 2, reps: '10', rest: 0, timed: false, instructions: 'Anteversión + lordosis lumbar al inhalar, retroversión + redondear columna al exhalar.' },
+      { name: 'Movilidad Torácica', series: 2, reps: '10 por lado', rest: 0, timed: false, instructions: 'Cuadrupedia, codo al techo sin mover pelvis, rotación alterna.' },
+      { name: 'Puente (Glúteo)', series: 2, reps: '10', rest: 0, timed: false, instructions: 'Tumbada boca arriba, brazos a 45°. Sube gracias a la contracción del glúteo. Mantén rodillas paralelas. Una vez rodilla-cadera-hombro en línea, baja despacio vértebra a vértebra.' },
+      { name: 'Sentadilla Libre SIN PESO', series: 2, reps: '10 sin carga', rest: 0, timed: false, instructions: 'Saca pecho, lordosis lumbar. Banco de referencia atrás. Empuja con todo el pie.' },
+      { name: 'Plancha Frontal', series: 3, reps: '20"on · 10"off · 20"on', rest: 10, timed: true, seconds: 20, instructions: 'Hombro-cadera-rodilla-tobillo en línea. Retroversión de pelvis y glúteos contraídos. 15" entre miniseries de 20".' },
+      { name: 'Plancha Cuadrupedia', series: 3, reps: '20"on · 10"off · 20"on', rest: 10, timed: true, seconds: 20, instructions: 'Cuadrupedia con rodillas en el aire. Proyecta la cadera hacia arriba.' },
+      { name: 'Tracción TRX 1 Pierna', series: 3, reps: '8 quitando apoyo de una pierna + 8 quitando la otra', rest: 0, timed: false, instructions: 'Tracciona y lleva los agarres a los laterales del cuerpo. Mantén hombro-cadera-rodilla-tobillo en línea. Junta escápulas al final del movimiento.' },
+      { name: 'Fondos de Rodilla', series: 3, reps: '8', rest: 0, timed: false, instructions: 'Tabla perfecta. Codos a 45°. Tocar con cara o pecho.' },
+      { name: 'Press Militar Mancuernas', series: 3, reps: '10 × dos mancuernas 6kg', rest: 0, timed: false, instructions: 'Banco a 75°. Bajas hasta tocar hombros y empuja sin bloquear en posición final.' },
+      { name: 'Hip Thrust', series: 3, reps: '10 × dos mancuernas 8kg en caderas, espalda en suelo', rest: 0, timed: false, instructions: 'Espalda apoyada en espina de la escápula, barra en espinas ilíacas. Empuje de cadera hacia el techo contrayendo el glúteo. Mirada en diagonal hacia arriba para mantener posición de columna.' },
+      { name: 'Sentadilla Goblet', series: 3, reps: '10 × dos mancuernas 8kg', rest: 0, timed: false, instructions: 'Banco de referencia atrás, roza con glúteo. Saca pecho, lordosis lumbar, empuja con todo el pie.' },
+    ]
+  },
+  {
+    id: 'D',
+    label: 'Fza',
+    type: 'fza',
+    schema: 'Fza · Ae · Ae · Fza · Ae · — · —',
+    methodology: 'Vertical',
+    warmup: 'Los 4 primeros ejercicios como movilidad articular',
+    exercises: [
+      { name: 'Gato/Camello', series: 2, reps: '10', rest: 0, timed: false, instructions: 'Inhala sacando pecho y lordosis lumbar, exhala redondeando la columna hacia arriba.' },
+      { name: 'Movilidad Torácica', series: 2, reps: '10 por lado', rest: 0, timed: false, instructions: 'Cuadrupedia, codo al techo, rotación alterna.' },
+      { name: 'Puente (Glúteo)', series: 2, reps: '10', rest: 0, timed: false, instructions: 'Contrae el glúteo para subir, baja vértebra a vértebra. Rodillas paralelas.' },
+      { name: 'Sentadilla Libre SIN PESO', series: 2, reps: '10 sin carga', rest: 0, timed: false, instructions: 'Banco de referencia atrás. Saca pecho y lordosis lumbar. Empuja con todo el pie.' },
+      { name: 'Skater Squat TRX', series: 3, reps: '10 por pierna', rest: 0, timed: false, instructions: 'Baja a una pierna con ligera sujeción de las correas. Mantén la tensión en piernas, no en brazos.' },
+      { name: 'Peso Muerto Rumano con Mancuernas', series: 3, reps: '10 × mancuernas 8kg', rest: 0, timed: false, instructions: 'Predomina la flexión de cadera. Baja con mancuernas pegadas al cuerpo, mirada en diagonal al suelo. Al llegar a tu límite de flexibilidad de isquiotibiales, sube. Mantén lordosis lumbar y anteversión de pelvis.' },
+      { name: 'Fondos de Rodilla', series: 3, reps: '8', rest: 0, timed: false, instructions: 'Tabla perfecta. Codos a 45°. Tocar con cara o pecho.' },
+      { name: 'Press Vertical Unilateral', series: 3, reps: '10 × mancuerna 6kg por mano', rest: 0, timed: false, instructions: 'Semiarrodillado, empuje vertical a una mano.' },
+      { name: 'Remo con Mancuerna', series: 3, reps: '8 × mancuerna 6kg', rest: 0, timed: false, instructions: 'Sacar pecho, lordosis lumbar. Llevar mancuerna a la cadera. Mirada abajo. No rotar el tronco.' },
+      { name: 'Plancha Lateral', series: 3, reps: '20" por lado', rest: 0, timed: true, seconds: 20, instructions: 'Empujar con la cadera. Línea cabeza-ombligo-pubis-pies.' },
+      { name: 'Plancha Frontal', series: 3, reps: '20"on · 15"off · 20"on', rest: 15, timed: true, seconds: 20, instructions: 'Hombro-cadera-rodilla-tobillo en línea. Retroversión de pelvis. 15" entre miniseries.' },
+    ]
+  },
+  {
+    id: 'E',
+    label: 'Fza',
+    type: 'fza',
+    schema: 'Ae · Fza · Ae · Fza · Ae · — · —',
+    methodology: 'Vertical',
+    warmup: 'Los 4 primeros ejercicios como movilidad articular',
+    exercises: [
+      { name: 'Gato/Camello', series: 2, reps: '15', rest: 0, timed: false, instructions: 'Movilidad de columna. Anteversión y lordosis al inhalar, retroversión y flexión al exhalar.' },
+      { name: 'Puente', series: 2, reps: '15', rest: 0, timed: false, instructions: 'Contraer el glúteo en todo el recorrido. Rodillas a la anchura de caderas, no juntarlas.' },
+      { name: 'Plancha Frontal', series: 2, reps: '25"', rest: 0, timed: true, seconds: 25, instructions: 'Hombro-cadera-rodilla-tobillo en línea. Retroversión pelvis y glúteos contraídos.' },
+      { name: 'Bird Dog', series: 2, reps: '20', rest: 0, timed: false, instructions: 'Cuadrupedia, eleva brazo y pierna contraria sin rotar pelvis ni hombros.' },
+      { name: 'Sentadilla Libre', series: 3, reps: '10 × dos mancuernas 8kg', rest: 0, timed: false, instructions: 'Banco de referencia. Saca pecho, lordosis lumbar, empuja con todo el pie.' },
+      { name: 'Remo con Mancuerna', series: 3, reps: '10 por mano × 8kg', rest: 0, timed: false, instructions: 'Sacar pecho, lordosis lumbar. Mancuerna a la cadera. No rotar el tronco.' },
+      { name: 'Puente (con carga)', series: 3, reps: '10 × dos mancuernas 8kg', rest: 0, timed: false, instructions: 'Contraer glúteo. Rodillas paralelas a la anchura de caderas.' },
+      { name: 'Floor Press con Mancuernas', series: 3, reps: '10 × dos mancuernas 6kg', rest: 0, timed: false, instructions: 'Tumbada boca arriba con flexión de caderas y rodillas. Press horizontal, el codo no se apoya (solo roza el tríceps). Mantén tensión muscular.' },
+      { name: 'Press Militar de Pie', series: 3, reps: '10 × dos mancuernas 6kg', rest: 0, timed: false, instructions: 'De pie. Lleva la barra a la parte alta del esternón y empuja hasta por encima de la cabeza. Rodillas ligeramente flexionadas y tronco algo inclinado hacia atrás.' },
+      { name: 'Escalador', series: 3, reps: '20 repeticiones alternando pies', rest: 0, timed: false, instructions: 'Mantén retroversión de pelvis y contracción de glúteo durante todo el movimiento. Alterna pies de forma controlada.' },
+      { name: 'Curl Bíceps Mancuernas', series: 3, reps: '10 × dos mancuernas 6kg', rest: 0, timed: false, instructions: 'De pie sacando pecho, rodillas semiflexionadas, abdomen tenso. Flexiona codos con muñecas bloqueadas. Fase excéntrica controlada. Espalda en pared con piernas adelantadas.' },
+    ]
+  },
+  {
+    id: 'F',
+    label: 'Fza',
+    type: 'fza',
+    schema: 'Fza · Ae · Ae · Fza · Ae · — · —',
+    methodology: 'Vertical',
+    warmup: 'Los 4 primeros ejercicios como movilidad articular',
+    exercises: [
+      { name: 'Gato/Camello', series: 2, reps: '10', rest: 0, timed: false, instructions: 'Movilidad de columna alternando lordosis y flexión.' },
+      { name: 'Puente (Glúteo)', series: 2, reps: '10', rest: 0, timed: false, instructions: 'Boca arriba, brazos a 45°. Sube contrayendo glúteo. Rodillas paralelas. Baja vértebra a vértebra.' },
+      { name: 'Plancha Frontal', series: 2, reps: '25"', rest: 0, timed: true, seconds: 25, instructions: 'Hombro-cadera-rodilla-tobillo en línea. Retroversión pelvis y glúteos.' },
+      { name: 'Sentadilla Libre SIN PESO', series: 2, reps: '12 sin carga', rest: 0, timed: false, instructions: 'Saca pecho, lordosis lumbar, banco de referencia.' },
+      { name: 'Zancada Estática Rodilla', series: 3, reps: '10 por pierna × mancuerna 8kg con ambas manos a la altura del pecho', rest: 0, timed: false, instructions: 'Paso o zancada amplia al frente. Mantén cadera y tronco neutros. No flexionar el tronco. Empuja el suelo para recuperar la posición.' },
+      { name: 'Fondos de Rodilla', series: 3, reps: '10', rest: 0, timed: false, instructions: 'Tabla perfecta. Codos a 45°. Tocar con cara o pecho.' },
+      { name: 'Puente (con carga)', series: 3, reps: '10 × dos mancuernas 8kg en caderas', rest: 0, timed: false, instructions: 'Contraer glúteo voluntariamente. Rodillas a la anchura de caderas.' },
+      { name: 'Press Vertical Unilateral', series: 3, reps: '8 por mano × mancuerna 6kg', rest: 0, timed: false, instructions: 'Semiarrodillado. Empuje vertical a una mano con mancuerna.' },
+      { name: 'Jalón Agarre Ancho Prono', series: 3, reps: '12 × 15kg', rest: 0, timed: false, instructions: 'Lleva la barra a la parte alta del esternón. Saca pecho e inclínate ligeramente 10°. Agarre un poco más de la anchura de hombros. Mirada arriba en diagonal.' },
+      { name: 'Plancha Lateral', series: 3, reps: '20" por lado', rest: 0, timed: true, seconds: 20, instructions: 'Empujar con la cadera. Cabeza-ombligo-pubis-pies en línea.' },
+      { name: 'Plancha Frontal un Apoyo', series: 3, reps: '20 alternando el pie que quita el apoyo', rest: 0, timed: false, instructions: 'Misma posición de plancha. Quita un apoyo. No mantener mucho tiempo el pie arriba.' },
+    ]
+  },
+  {
+    id: 'G',
+    label: 'Fza',
+    type: 'fza',
+    schema: 'Ae · Fza · Ae · Ae · Fza · — · —',
+    methodology: 'Vertical',
+    warmup: 'Los 4 primeros ejercicios como movilidad articular',
+    exercises: [
+      { name: 'Gato/Camello', series: 2, reps: '15', rest: 0, timed: false, instructions: 'Movilidad de columna alternando lordosis y flexión.' },
+      { name: 'Puente', series: 2, reps: '15', rest: 0, timed: false, instructions: 'Contraer glúteo. Rodillas a la anchura de caderas.' },
+      { name: 'Plancha Frontal', series: 2, reps: '25"', rest: 0, timed: true, seconds: 25, instructions: 'Hombro-cadera-rodilla-tobillo en línea. Retroversión y glúteos.' },
+      { name: 'Bird Dog', series: 2, reps: '20', rest: 0, timed: false, instructions: 'Cuadrupedia, eleva brazo y pierna contraria sin rotar.' },
+      { name: 'Sentadilla Frontal a Silla', series: 3, reps: '10 × dos mancuernas 8kg', rest: 0, timed: false, instructions: 'Banco de referencia. Saca pecho, lordosis lumbar, empuja con todo el pie.' },
+      { name: 'Floor Press con Mancuernas', series: 3, reps: '10 por mano unilateral × mancuerna 6kg', rest: 0, timed: false, instructions: 'Boca arriba, flexión de caderas y rodillas. Press horizontal unilateral. Tríceps roza el suelo, siempre con tensión muscular.' },
+      { name: 'Peso Muerto', series: 3, reps: '10 × dos mancuernas 8kg', rest: 0, timed: false, instructions: 'Mirada al frente o diagonal al suelo. Toca el suelo con los discos manteniendo lordosis lumbar y anteversión de pelvis. Sube empujando con talones, notando el glúteo. Subida explosiva.' },
+      { name: 'Push Press Unilateral', series: 3, reps: '8 por lado × mancuerna 6kg', rest: 0, timed: false, instructions: 'De pie con la KB a la altura del hombro. Impulsa con una pequeña flexión de rodillas y empuja la KB en vertical hacia el techo.' },
+      { name: 'Plancha Frontal un Apoyo Alternando', series: 3, reps: '20 cambios de pies quitando un apoyo', rest: 0, timed: false, instructions: 'Plancha con retroversión. Quita un pie alternando. No mantener mucho tiempo arriba.' },
+      { name: 'Puente Isométrico un Apoyo', series: 3, reps: '20 cambios de pies quitando un apoyo', rest: 0, timed: false, instructions: 'Contraer glúteo. Quita un apoyo alternando durante el movimiento.' },
+      { name: 'Remo Horizontal con Goma', series: 3, reps: '12', rest: 0, timed: false, instructions: 'Tracciona y lleva los agarres a los laterales del cuerpo. Mantén hombro-cadera-rodilla-tobillo en línea. Junta escápulas al final del movimiento.' },
+    ]
+  }
+];
+
+// Weekly schema: each array = [routine_id, day_label]
+// Based on documents: week 1 → Fza/Ae/Fza/Ae/Ae/Descanso, week 2 → Ae/Fza/Ae/Fza/Ae/Descanso, etc.
+const WEEK = [
+  { day: 'Lun', routine: 'A', type: 'fza' },
+  { day: 'Mar', routine: null, type: 'ae', label: 'Ae' },
+  { day: 'Mié', routine: 'B', type: 'fza' },
+  { day: 'Jue', routine: null, type: 'ae', label: 'Ae' },
+  { day: 'Vie', routine: 'C', type: 'fza' },
+  { day: 'Sáb', routine: null, type: 'des', label: '—' },
+  { day: 'Dom', routine: null, type: 'des', label: '—' },
+];
+
+// ========== STATE ==========
+let currentRoutineIdx = null;
+let completed = JSON.parse(localStorage.getItem('mr_completed') || '{}');
+let openCards = {};
+
+// ========== TIMER STATE ==========
+let timerInterval = null;
+let timerTotal = 0;
+let timerRemaining = 0;
+let timerRunning = false;
+let timerExName = '';
+
+// ========== RENDER WEEK ==========
+function renderWeek() {
+  const grid = document.getElementById('week-grid');
+  grid.innerHTML = '';
+  WEEK.forEach((d, i) => {
+    const div = document.createElement('div');
+    div.className = 'day-card' + (d.type === 'des' ? ' rest' : '') + (currentRoutineIdx === i ? ' active' : '');
+    const typeLabel = d.type === 'fza' ? 'Fza' : d.type === 'ae' ? 'Ae' : '—';
+    div.innerHTML = `<div class="day-name">${d.day}</div><span class="day-type ${d.type}">${typeLabel}</span>`;
+    if (d.type !== 'des') div.onclick = () => selectDay(i);
+    grid.appendChild(div);
+  });
+}
+
+function selectDay(i) {
+  currentRoutineIdx = i;
+  renderWeek();
+  const day = WEEK[i];
+  if (day.type === 'ae') {
+    showAerobicDay(i);
+  } else if (day.routine) {
+    const routine = ROUTINES.find(r => r.id === day.routine);
+    renderRoutine(routine, day.routine);
+  }
+}
+
+function showAerobicDay(i) {
+  const view = document.getElementById('routine-view');
+  view.innerHTML = `
+    <div class="routine-meta">
+      <span class="meta-pill"><strong>Tipo</strong> Aeróbico</span>
+      <span class="meta-pill"><strong>Día</strong> ${WEEK[i].day}</span>
+    </div>
+    <div class="cardio-card" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
+      <h3 style="font-size:15px;font-weight:500;margin-bottom:6px;">Sesión cardiovascular</h3>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6;">Sal a andar al menos 30 min a buen ritmo, rápido dentro de tus posibilidades. Debes poder llevar una conversación entrecortada (~60% VO₂Máx).</p>
+    </div>
+    <div style="margin-top:1.5rem;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="timer-btn primary" onclick="openTimer('Cardio — 30 min', 30*60)">▶ Iniciar 30 min</button>
+      <button class="timer-btn" onclick="openTimer('Cardio — 10 min bloque', 10*60)">10 min bloque</button>
+    </div>
+  `;
+}
+
+// ========== RENDER ROUTINE ==========
+function renderRoutine(routine, key) {
+  const view = document.getElementById('routine-view');
+  const compKey = 'r_' + key;
+  const done = completed[compKey] || [];
+  const pct = Math.round((done.length / routine.exercises.length) * 100);
+
+  view.innerHTML = `
+    <div class="routine-meta">
+      <span class="meta-pill"><strong>Rutina</strong> ${key}</span>
+      <span class="meta-pill"><strong>Metodología</strong> ${routine.methodology}</span>
+      <span class="meta-pill"><strong>Esquema</strong> ${routine.schema}</span>
+      <button class="reset-btn" onclick="resetRoutine('${key}')">Reiniciar</button>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-label"><span>${done.length}/${routine.exercises.length} ejercicios completados</span><span>${pct}%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+    </div>
+    <div class="section-label">Calentamiento — ${routine.warmup}</div>
+    <div class="exercise-list" id="ex-list-${key}"></div>
+  `;
+
+  const list = document.getElementById('ex-list-' + key);
+  routine.exercises.forEach((ex, idx) => {
+    const isDone = done.includes(idx);
+    const isOpen = openCards[key + '_' + idx];
+    const card = document.createElement('div');
+    card.className = 'exercise-card' + (isDone ? ' done' : '') + (isOpen ? ' open' : '');
+    card.id = `ex-${key}-${idx}`;
+
+    const timeBadge = ex.timed ? `<span class="badge time" onclick="event.stopPropagation();openTimer('${ex.name}', ${ex.seconds})">⏱ ${ex.reps.match(/\d+"/)?.[0] || ex.seconds + '"'}</span>` : '';
+
+    card.innerHTML = `
+      <div class="exercise-header" onclick="toggleCard('${key}',${idx})">
+        <button class="check-btn ${isDone ? 'checked' : ''}" onclick="event.stopPropagation();toggleDone('${key}',${idx})" aria-label="Marcar completado"></button>
+        <div class="ex-info">
+          <div class="ex-name">${ex.name}</div>
+          <div class="ex-dose">${ex.series} series · ${ex.reps}${ex.rest > 0 ? ' · ' + ex.rest + '" descanso' : ''}</div>
+        </div>
+        <div class="ex-badges">
+          <span class="badge series">${ex.series}×</span>
+          ${timeBadge}
+        </div>
+        <span class="expand-arrow">▼</span>
+      </div>
+      <div class="exercise-body">${ex.instructions}</div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function toggleCard(key, idx) {
+  const k = key + '_' + idx;
+  openCards[k] = !openCards[k];
+  const card = document.getElementById(`ex-${key}-${idx}`);
+  if (card) card.classList.toggle('open', openCards[k]);
+}
+
+function toggleDone(routineKey, idx) {
+  const compKey = 'r_' + routineKey;
+  if (!completed[compKey]) completed[compKey] = [];
+  const arr = completed[compKey];
+  const pos = arr.indexOf(idx);
+  if (pos === -1) arr.push(idx); else arr.splice(pos, 1);
+  localStorage.setItem('mr_completed', JSON.stringify(completed));
+  const routine = ROUTINES.find(r => r.id === routineKey);
+  renderRoutine(routine, routineKey);
+}
+
+function resetRoutine(routineKey) {
+  completed['r_' + routineKey] = [];
+  localStorage.setItem('mr_completed', JSON.stringify(completed));
+  const routine = ROUTINES.find(r => r.id === routineKey);
+  renderRoutine(routine, routineKey);
+}
+
+// ========== PAGES ==========
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// ========== TIMER ==========
+function openTimer(name, seconds) {
+  timerExName = name;
+  timerTotal = seconds;
+  timerRemaining = seconds;
+  timerRunning = false;
+  clearInterval(timerInterval);
+  document.getElementById('timer-ex-name').textContent = name;
+  document.getElementById('timer-toggle-btn').textContent = 'Iniciar';
+  document.getElementById('timer-phase-label').textContent = formatTime(seconds);
+  updateTimerDisplay();
+  document.getElementById('timer-overlay').classList.add('show');
+}
+
+function closeTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  document.getElementById('timer-overlay').classList.remove('show');
+}
+
+function toggleTimer() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timer-toggle-btn').textContent = 'Reanudar';
+  } else {
+    if (timerRemaining <= 0) {
+      timerRemaining = timerTotal;
+      updateTimerDisplay();
+    }
+    timerRunning = true;
+    document.getElementById('timer-toggle-btn').textContent = 'Pausar';
+    timerInterval = setInterval(() => {
+      timerRemaining--;
+      updateTimerDisplay();
+      if (timerRemaining <= 0) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        document.getElementById('timer-toggle-btn').textContent = 'Reiniciar';
+        document.getElementById('timer-phase-label').textContent = '¡Completado!';
+        try { new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAA...').play(); } catch(e) {}
+      }
+    }, 1000);
+  }
+}
+
+function updateTimerDisplay() {
+  document.getElementById('timer-display').textContent = formatTime(timerRemaining);
+  const circumference = 263.9;
+  const pct = timerTotal > 0 ? timerRemaining / timerTotal : 0;
+  const offset = circumference * (1 - pct);
+  document.getElementById('timer-arc').style.strokeDashoffset = offset;
+  document.getElementById('timer-phase-label').textContent = timerRemaining > 0 ? formatTime(timerRemaining) + ' restantes' : '¡Completado!';
+}
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
+}
+
+// ========== INIT ==========
+renderWeek();
+selectDay(0);
+</script>
+</body>
+</html>
